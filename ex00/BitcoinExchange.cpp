@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 16:05:26 by wiozsert          #+#    #+#             */
-/*   Updated: 2023/04/14 19:02:14 by wiozsert         ###   ########.fr       */
+/*   Updated: 2023/04/15 16:57:26 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,5 @@ void	checkArgumentErrors(int ac, char **av)
 		std::cout << REDCOLOR "Error: argument is not a file." << ENDCOLOR << std::endl;
 		exit (EXIT_FAILURE);
 	}
+	return ;
 }

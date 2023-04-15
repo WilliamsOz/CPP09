@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 16:05:07 by wiozsert          #+#    #+#             */
-/*   Updated: 2023/04/15 18:01:29 by wiozsert         ###   ########.fr       */
+/*   Updated: 2023/04/15 20:12:45 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,39 +33,51 @@ Chaque ligne de ce fichier doit respecter le format suivant : "date | valeur".
 Une date valide sera toujours au format suivant : Année-Mois-Jour.
 Une valeur valide doit être soit un float, soit un int positif compris entre 0 et 1000
 
-
-
 */
 
-#include <cstring>
-#include <string>
-#include <climits>
+	// for(std::map<std::string, long double>::const_iterator it = data.begin() ; it != data.end() ; ++it)
+		// std::cout << it->first << " " << it->second << std::endl;
+
+#include <cctype>
+
+void	checkDate(std::string str) {
+	date	d;
+
+	d.y = atoi(str.c_str());
+	P(d.y)
+	return ;
+}
+
+// void	checkValue(std::string str) {
+
+
+// 	return ;
+// }
+
+void	readInputFile(std::map<std::string, long double> data, const char *inputFile) {
+	std::fstream	ifs;
+	std::string		tmp;
+	long double		value;
+
+	ifs.open(inputFile, std::fstream::in);
+	while (ifs) {
+		std::getline(ifs, tmp);
+		if (tmp.find("date | value") == std::string::npos) {
+			checkDate(tmp);
+			// checkValue(tmp);
+		}
+	}
+	(void)data;
+	(void)value;
+
+	return ;
+}
 
 void	btc(const char *dataBase, const char *inputFile) {
 	std::map<std::string, long double>	data;
-	std::fstream			dataBaseFile;
-	std::string				tmp;
-	std::string				date;
-	long double				value;
 
-	dataBaseFile.open(dataBase, std::fstream::in);
-	while (dataBaseFile) {
-		dataBaseFile >> tmp;
-		if (tmp.find("-") != std::string::npos) {
-			date = tmp.substr(0, tmp.find(","));
-			value = atof(tmp.c_str() + strlen(date.c_str()) + 1);
-			data[date] = value;
-		}
-		// P(date)
-		// P(value)
-	}
-	for(std::map<std::string, long double>::const_iterator it = data.begin() ; it != data.end() ; ++it)
-	{
-		std::cout << it->first << " " << it->second << std::endl;
-		exit (EXIT_FAILURE);
-	}
-	(void)inputFile;
-
+	getData(&data, dataBase);
+	readInputFile(data, inputFile);
 	return ;
 }
 

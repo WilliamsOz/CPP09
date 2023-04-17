@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 12:06:23 by wiozsert          #+#    #+#             */
-/*   Updated: 2023/04/17 13:46:41 by wiozsert         ###   ########.fr       */
+/*   Updated: 2023/04/17 13:50:09 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,29 @@ Votre programme doit pouvoir gérer les opérations avec ces operateur : "+ - / 
 Vous n'avez pas besoin de gérer les parenthèses ou les nombres décimaux.
 
 */
+
+// int	add(int nb1, int nb2) {
+// 	return (nb1 + nb2);
+// }
+
+// int	minus(int nb1, int nb2) {
+// 	return (nb1 - nb2);
+// }
+
+// int	mult(int nb1, int nb2) {
+// 	return (nb1 * nb2);
+// }
+
+// int	div(int nb1, int nb2) {
+// 	return (nb1 / nb2);
+// }
+
+// struct main
+// {
+	
+	// char op;
+// };
+
 
 void	rpn(char *av, int i) {
 	std::stack<int>	data;

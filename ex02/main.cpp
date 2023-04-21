@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 13:52:02 by wiozsert          #+#    #+#             */
-/*   Updated: 2023/04/21 18:11:21 by wiozsert         ###   ########.fr       */
+/*   Updated: 2023/04/21 18:11:47 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ doit permettre de bien voir différence entre les deux contenants utilisés.
 // }
 
 /*
+
 1_Regroupez les éléments de X dans ⌊n/2⌋ paires d'éléments, arbitrairement,
 laissant un élément non apparié s'il y a un nombre impair d'éléments.
 

@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 16:06:42 by wiozsert          #+#    #+#             */
-/*   Updated: 2023/04/16 19:18:36 by wiozsert         ###   ########.fr       */
+/*   Updated: 2023/04/22 20:35:27 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,6 @@
 #define MAGCOLOR "\033[1;35m"
 #define CYANCOLOR "\033[1;36m"
 #define ENDCOLOR "\033[0m"
-
-#define P(x) std::cout << x << std::endl; //del
-#define EX exit (EXIT_FAILURE);
 
 void	checkArgumentErrors(int ac, char **av);
 void	btc(const char *dataBase, const char *inputFile);

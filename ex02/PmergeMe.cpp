@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 14:29:41 by wiozsert          #+#    #+#             */
-/*   Updated: 2023/04/22 20:21:17 by wiozsert         ###   ########.fr       */
+/*   Updated: 2023/04/22 20:27:10 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,7 +281,7 @@ static void	displayInfo(char **av, std::vector<int>	v, std::deque<int>d, timer t
 	((((long double)t.vectortimer)/CLOCKS_PER_SEC) * 1000)
 	<< " ms" << std::endl;
 	std::cout << "Time to process a range of " <<
-	d.size() << " elements with std::vector : " <<
+	d.size() << " elements with std::deque : " <<
 	((((long double)t.dequetimer)/CLOCKS_PER_SEC) * 1000)
 	<< " ms" << std::endl;
 	return ;

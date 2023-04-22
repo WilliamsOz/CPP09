@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 12:06:21 by wiozsert          #+#    #+#             */
-/*   Updated: 2023/04/21 17:14:39 by wiozsert         ###   ########.fr       */
+/*   Updated: 2023/04/22 20:34:29 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,15 @@ static bool	syntaxError(char *av, int i, int nbCount) {
 		return false;
 }
 
+static bool	divideByZero(char *av, int i) {
+	while (av[i]) {
+		if (atoi(av + i) == 0 && av[i + 2] == '/')
+			return true;
+		i++;
+	}
+	return false;
+}
+
 void	checkArgumentErrors(int ac, char *av, int i) {
 	if (ac != 2)
 		throw std::invalid_argument("Error");
@@ -63,8 +72,10 @@ void	checkArgumentErrors(int ac, char *av, int i) {
 		else
 			i++;
 	}
-		if (syntaxError(av, 0, 0) == true)
-			throw std::invalid_argument("Error");
+	if (syntaxError(av, 0, 0) == true)
+		throw std::invalid_argument("Error");
+	else if (divideByZero(av, 0) == true)
+		throw std::invalid_argument("Error");
 	return ;
 }
 

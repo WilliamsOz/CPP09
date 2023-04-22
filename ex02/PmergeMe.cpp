@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 14:29:41 by wiozsert          #+#    #+#             */
-/*   Updated: 2023/04/21 14:30:11 by wiozsert         ###   ########.fr       */
+/*   Updated: 2023/04/22 16:10:41 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,30 @@ void	checkErrors(int ac, char **av) {
 		throw std::invalid_argument("Error");
 	isPositiveNumSeq(av, 1, 0);
 	isInteger(av, 0);
+	return ;
+}
+
+void	displayInfo(char **av, std::vector<int>	v, timer t) {
+	std::vector<int>::iterator	itr;
+	int							i;
+
+	i = 1;
+	std::cout << "Before: ";
+	while (av[i]) {
+		std::cout << atoi(av[i]) << " ";
+		i++;
+	}
+	std::cout << std::endl;
+	itr = v.begin();
+	std::cout << "After: ";
+	while (itr != v.end()) {
+		std::cout << *itr << " ";
+		itr++;
+	}
+	std::cout << std::endl;
+	std::cout << "Time to process a range of " <<
+	v.size() << " elements with std::vector : " <<
+	((((long double)t.vectortimer)/CLOCKS_PER_SEC) * 1000)
+	<< " ms" << std::endl;
 	return ;
 }

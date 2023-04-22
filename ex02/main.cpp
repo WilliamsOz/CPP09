@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 13:52:02 by wiozsert          #+#    #+#             */
-/*   Updated: 2023/04/22 14:11:34 by wiozsert         ###   ########.fr       */
+/*   Updated: 2023/04/22 16:10:42 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ doit permettre de bien voir différence entre les deux contenants utilisés.
 */
 
 #include "PmergeMe.hpp"
-#include <vector>
 
 void	printPair(std::pair<int, int>	tab[], int count) {
 	int i = 0;
@@ -113,12 +112,13 @@ bool	allNbPushed(std::pair<int, int> pairTab[], int nbOfPair, int i) {
 	return true;
 }
 
-void	pushToVector(std::vector<int> *v, std::pair<int, int> pairTab[], int nbOfPair, int i) {
+void	pushToVector(std::vector<int> **v, std::pair<int, int> pairTab[], int nbOfPair, int i) {
 	int	tmp;
 
-	tmp = pairTab[i].second;
 	if (allNbPushed(pairTab, nbOfPair, 0) == true)
 		return ;
+	tmp = pairTab[i].second;
+	i++;
 	while (i < nbOfPair) {
 		if (pairTab[i].second > tmp)
 			tmp = pairTab[i].second;
@@ -126,16 +126,18 @@ void	pushToVector(std::vector<int> *v, std::pair<int, int> pairTab[], int nbOfPa
 	}
 	i = 0;
 	while (i < nbOfPair) {
-		if (tmp == pairTab[i].second)
+		if (tmp == pairTab[i].second) {
 			pairTab[i].second = -1;
+			break ;
+		}
 		i++;
 	}
-	v->insert(v->begin(), tmp);
+	(*v)->insert((*v)->begin(), tmp);
 	pushToVector(v, pairTab, nbOfPair, 0);
 	return ;
 }
 
-void	pushMinToVector(std::vector<int> *v, std::pair<int, int> pairTab[], int nbOfPair, int *keepLast) {
+void	pushMinToVector(std::vector<int> **v, std::pair<int, int> pairTab[], int nbOfPair, int *keepLast) {
 	int	i;
 	int	tmp;
 
@@ -149,13 +151,13 @@ void	pushMinToVector(std::vector<int> *v, std::pair<int, int> pairTab[], int nbO
 	i = 0;
 	while (i < nbOfPair) {
 		if (tmp == pairTab[i].first) {
-			if (*keepLast > 0 && tmp < *keepLast)
-				pairTab[i].first = -1;
-			else {
+			if (*keepLast >= 0 && tmp >= *keepLast) {
 				tmp = *keepLast;
 				*keepLast = -42;
 			}
-			v->insert(v->begin(), tmp);
+			else
+				pairTab[i].first = -1;
+			(*v)->insert((*v)->begin(), tmp);
 			break ;
 		}
 		i++;
@@ -163,25 +165,26 @@ void	pushMinToVector(std::vector<int> *v, std::pair<int, int> pairTab[], int nbO
 	return ;
 }
 
-void	addLastNb(std::vector<int> *v, std::pair<int, int> pairTab[], int NbOfPair, int keepLast) {
+void	addLastNb(std::vector<int> **v, std::pair<int, int> pairTab[], int NbOfPair, int keepLast) {
 	std::vector<int>::iterator	itr;
 	int							i;
 
 	i = 0;
 	while (i < NbOfPair) {
 		if (pairTab[i].first > 0) {
-			itr = std::lower_bound(v->begin(), v->end(), pairTab[i].first);
-			v->insert(itr, pairTab[i].first);
+			itr = std::lower_bound((*v)->begin(), (*v)->end(), pairTab[i].first);
+			(*v)->insert(itr, pairTab[i].first);
 		}
 		i++;
 	}
-	if (keepLast > 0)
-		itr = std::lower_bound(v->begin(), v->end(), keepLast);
+	if (keepLast > 0) {
+		itr = std::lower_bound((*v)->begin(), (*v)->end(), keepLast);
+		(*v)->insert(itr, keepLast);
+	}
 	return ;
 }
 
-void	sort(int ac, char **av) {
-	std::vector<int>		v;
+void	vectorSort(std::vector<int> *v, int ac, char **av) {
 	std::pair<int, int>		pairTab[ac / 2];
 	int	keepLast;
 
@@ -191,8 +194,17 @@ void	sort(int ac, char **av) {
 	pushToVector(&v, pairTab, ac/2, 0);
 	pushMinToVector(&v, pairTab, ac/2, &keepLast);
 	addLastNb(&v, pairTab, ac/2, keepLast);
-	printVector(v);
-	// printPair(pairTab, ac/2);
+	return ;
+}
+
+void	sort(int ac, char **av) {
+	std::vector<int>		v;
+	timer	timeInfo;
+
+	timeInfo.start = std::clock();
+	vectorSort(&v, ac, av);
+	timeInfo.vectortimer = std::clock() - timeInfo.start;
+	displayInfo(av, v, timeInfo);
 	return ;
 }
 
